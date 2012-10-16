@@ -26,6 +26,7 @@ import com.ganesh.test.base.BillCalculatorObjectMother;
  * 6. A user can get only one of the percentage based discounts on a bill.  
  * 
  * 
+ * 
  * Finds the net payable amount. 
  * 
  * 
@@ -43,6 +44,7 @@ public class StoreBillCalculatorIntegrationTest {
 		customer = BillCalculatorObjectMother.getDiscountEligibleCustomer();
 		storeBillCalculator = new StoreBillingCalculatorImpl();
 		items = BillCalculatorObjectMother.getItemsList();
+		//Cost of both items 200 each. One grocery yummy sambar masala :)  and other is iPhone
 	}
 	
 	
@@ -50,9 +52,20 @@ public class StoreBillCalculatorIntegrationTest {
 	public void shouldCalculateTheBill(){
 		double payableAmount = storeBillCalculator.calculatePayableAmount(customer,items);
 		assertEquals(360.0, payableAmount,0.0);
-		
 	}
-	
-	
+
+	@Test
+	public void shouldCalculateTheBillForEmployee(){
+		customer = BillCalculatorObjectMother.getEmployeeCustomer();
+		double payableAmount = storeBillCalculator.calculatePayableAmount(customer,items);
+		assertEquals(320.0, payableAmount,0.0);
+	}
+
+	@Test
+	public void shouldCalculateTheBillForAffiliate(){
+		customer = BillCalculatorObjectMother.getAffiliateCustomer();
+		double payableAmount = storeBillCalculator.calculatePayableAmount(customer,items);
+		assertEquals(340.0, payableAmount,0.0);
+	}
 	
 }
