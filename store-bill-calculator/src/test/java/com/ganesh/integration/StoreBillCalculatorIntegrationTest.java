@@ -2,11 +2,15 @@ package com.ganesh.integration;
 
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 import com.ganesh.domain.Customer;
 import com.ganesh.domain.Item;
 import com.ganesh.storebilling.StoreBillCalculator;
+import com.ganesh.storebilling.StoreBillingCalculatorImpl;
+import com.ganesh.test.base.BillCalculatorObjectMother;
 
 
 /*
@@ -29,12 +33,24 @@ import com.ganesh.storebilling.StoreBillCalculator;
 public class StoreBillCalculatorIntegrationTest {
 
 	StoreBillCalculator storeBillCalculator;
+	
 	private Customer customer;
 	private List<Item> items;
 	
+	
+	@Before
+	public void setup(){
+		customer = BillCalculatorObjectMother.getDiscountEligibleCustomer();
+		storeBillCalculator = new StoreBillingCalculatorImpl();
+		items = BillCalculatorObjectMother.getItemsList();
+	}
+	
+	
 	@Test
 	public void shouldCalculateTheBill(){
-		storeBillCalculator.calculatePayableAmount(customer,items);
+		double payableAmount = storeBillCalculator.calculatePayableAmount(customer,items);
+		assertEquals(360.0, payableAmount,0.0);
+		
 	}
 	
 	
