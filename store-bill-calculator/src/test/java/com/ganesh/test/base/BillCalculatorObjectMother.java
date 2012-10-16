@@ -34,6 +34,10 @@ public class BillCalculatorObjectMother {
 	public static Customer getDiscountEligibleCustomer() {
 		return new Customer("Ganesh", new Date(new Date().getYear() - 3, 1, 24), CustomerType.REGISTRED);
 	}
+
+	public static Customer getDiscountInEligibleCustomer() {
+		return new Customer("Ganesh", new Date(new Date().getYear() - 1, 1, 24), CustomerType.REGISTRED);
+	}
 	
 	public static Customer getEmployeeCustomer() {
 		return new Customer("Ganesh", new Date(2009, 1, 24), CustomerType.EMPLOYEE);

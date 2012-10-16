@@ -37,7 +37,7 @@ public class StoreBillingCalculatorImpl implements StoreBillCalculator {
 				|| customer.getType() != CustomerType.REGISTRED;
 	}
 
-	private double getDiscountBasedOntotalCost(double totalCost) {
+	protected double getDiscountBasedOntotalCost(double totalCost) {
 		return Math.floor(totalCost / 100) * DISCOUNT_PER_HUNDRED_BILL;
 	}
 
